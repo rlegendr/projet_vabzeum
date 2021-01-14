@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('manage_scale') }}">Gestion du barême</a> -
+            <a style="color: #294B4C" href="{{ url_for('modify_scale', id=scale.id) }}">{% block title %}Barême n°
+                {{ scale.id }}{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="vab_box_shadow">
+        <form name="modify_scale_form" aria-disabled="true"
+              action="" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <table class="">
+                <tr>
+                    <td class="">{{ form.id.label(class_="text_18px") }}</td>
+                    <td class="">{{ form.id(disabled=True, class_="classic_input", placeholder=scale.id) }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.side.label(class_="text_18px") }}</td>
+                    <td class="">{{ form.side(disabled=True, class_="classic_input", placeholder=scale.side) }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.diff.label(class_="text_18px") }}</td>
+                    <td class="">{{ form.diff(disabled=True, class_="classic_input", placeholder=scale.diff) }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.points.label(class_="text_18px") }}</td>
+                    <td class="">{{ form.points(type="number", class_="classic_input", placeholder=scale.points) }}</td>
+                </tr>
+                <tr>
+                    <td class=" t-center td_last"
+                        colspan="2">{{ form.submit_modify_scale(class_="vab_button") }}</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

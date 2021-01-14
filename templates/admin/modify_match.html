@@ -1,0 +1,178 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/manage_match.js" type="text/javascript"></script>
+    <script>$(document).ready(init_modify_match(
+        "{{ members_id[match.ally_1] }}", "{{ members_id[match.ally_2] }}",
+        "{{ members_id[match.ally_3] }}", "{{ members_id[match.ally_4] }}",
+        "{{ members_id[match.ally_5] }}", "{{ match.nb_ally }}",
+        "{{ match.nb_vab }}", "{{ match.nb_ennemy }}", "{{ match.side }}",
+        "{{ match.entity }}", "{{ match.commentary }}"));</script>
+{% endblock %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-1" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('matchs_list') }}">Liste des matchs</a> -
+            <a style="color: #294B4C" href="{{ url_for('modify_match', id=match.id) }}">{% block title %}Match n°
+                {{ match.id }}{% endblock %}</a>
+        </h1>
+    </div>
+    {% if match.screen_name != "None" %}
+        <div class="d_flex mb_10px" style="justify-content: center">
+            <img src="/static/uploads/{{ match.screen_name }}">
+        </div>
+    {% endif %}
+    <div class="vab_box_shadow" style="margin-bottom: 30px">
+        <form name="modify_match_form" aria-disabled="true" action=""
+              method="post"
+              enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset id="fieldset_register">
+                <div class="p_15">
+                    <table>
+                        <tr>
+                            <td><p class="text_15px"> {{ form.id.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.id(class_="admin_input", placeholder = match.id, disabled=True) }}</p>
+                            </td>
+                            {#                            </tr>#}
+                            {#                            <tr>#}
+                            <td><p class="text_15px"> {{ form.used_nickname.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.used_nickname(class_="admin_input", placeholder = match.used_nickname, disabled=True) }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="p_15">
+                    <table>
+                        <tr><p class="text_18px">Nombres:</p></tr>
+                        <tr>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.nb_ally.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.nb_ally(class_="select", onchange="nb_ally_ops(this.value)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.nb_vab.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.nb_vab(class_="select", onchange="nb_vab_ops(this.value)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.nb_ennemy.label }}</p></td>
+                            <td><p class="text_15px"> {{ form.nb_ennemy(class_="select") }}</p></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="p_15">
+                    <table>
+                        <tr><p class="text_18px">Alliers:</p></tr>
+                        <tr>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.ally_1.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.ally_1(class_="select", onchange = "change_player_list(this.value, 1)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.ally_2.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.ally_2(class_="select", onchange = "change_player_list(this.value, 2)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.ally_3.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.ally_3(class_="select", onchange = "change_player_list(this.value, 3)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.ally_4.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.ally_4(class_="select", onchange = "change_player_list(this.value, 4)") }}</p>
+                            </td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.ally_5.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.ally_5(class_="select", onchange = "change_player_list(this.value, 5)") }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="p_15">
+                    <table>
+                        <tr><p class="text_18px">Type de match:</p></tr>
+                        <tr>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.side.label }}</p></td>
+                            <td><p class="text_15px"> {{ form.side(class_="select") }}</p></td>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.entity.label }}</p></td>
+                            <td><p class="text_15px"> {{ form.entity(class_="select") }}</p></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="p_15">
+                    <table>
+                        <tr><p class="text_15px pb_15">Attention le bonus est figé lors de l'enregistrement du
+                            match, on ne peut donc pas le <br>
+                            sélectionner dans une liste. S'il doit être changé, c'est à la main.</p></tr>
+                        <tr>
+                            <td><p class="text_18px"> {{ form.bonus_mult_name.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.bonus_mult_name(class_="admin_input", placeholder = match.bonus_mult_name) }}</p>
+                            </td>
+                            <td><p class="text_18px"> {{ form.bonus_mult.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.bonus_mult(type="number", class_="admin_input", placeholder = match.bonus_mult) }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="p_15">
+                    <tr>{{ form.commentary.label(class_="text_18px") }}</tr>
+                    <tr>
+                        <td colspan="4">{{ form.commentary(placeholder="facultatif", class_="ml_10px commentary") }}</td>
+                    </tr>
+                </div>
+                <div class="p_15">
+                    <table>
+                        <tr>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.bot_checker.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.bot_checker(class_="vab_checkbox", checked=(True if match.bot_checker == 1 else False)) }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-l-10"><p class="text_15px"> {{ form.admin_validator.label }}</p></td>
+                            <td>
+                                <p class="text_15px"> {{ form.admin_validator(class_="vab_checkbox", checked=(True if match.admin_validator == 1 else False)) }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <div style="display: flex; justify-content: center" class="center_button ">
+                <button class="vab_button neutral_button" id="confirm_match" name="confirm_match"
+                        onclick="modify_button_confirm()"
+                        type="button">Soumettre
+                </button>
+                <button style="margin-left: 10px" class="vab_button neutral_button" id="modify_match"
+                        name="confirm_match"
+                        onclick="modify_button_modify()"
+                        type="button" disabled>Modifier
+                </button>
+                </p>{{ form.submit_modify_match(style="margin-left: 10px", onclick = "modify_button_validate()", disabled = True, class_="vab_button") }}
+                <input style="margin-left: 10px" class="vab_button danger_button button" id="js_delete_match"
+                       name="js_delete_match"
+                       onclick="delete_match()"
+                       type="button" value="Supprimer">
+            </div>
+            <div class="t-center">
+                        <span class="text_15px" id="alert_delete_msg" style="display: none">La suppression est définitive, t'es
+                                sûr? </span>
+            </div>
+            <div class="d_flex" style="justify-content: center">
+                <div>
+                    <a style="display: none" class="disable_link vab_button danger_button"
+                       id="submit_delete_match"
+                       name="js_delete_match" href="{{ url_for('delete_match', id=match.id) }}"
+                       type="button">Oui</a>
+                </div>
+                <div>
+                    <input style="display: none" class="ml_10px vab_button" id="js_cancel_delete_match"
+                           name="js_delete_match" onclick="cancel_delete_match()"
+                           type="button" value="Non">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

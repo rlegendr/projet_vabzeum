@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('codes_list') }}">Liste des codes</a> -
+            <a style="color: #294B4C" href="{{ url_for('modify_code', id=code.id) }}">{% block title %}Code
+                {{ code.name }}{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="modify_code_div">
+        <form style="width: 400px; margin: auto" class="vab_box_shadow" name="modify_user_form" aria-disabled="true"
+              action="" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="flashes">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category != "global_message" %}
+                                <div class="flash_msg {{ category }}">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <table class="m-auto">
+                <tr>
+                    <td class="">{{ form.name.label(class_="text_20px") }}</td>
+                    <td class="t_center">{{ form.name(class_="classic_input", placeholder=code.name) }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.mult.label(class_="text_20px") }}</td>
+                    <td class="t_center">{{ form.mult(type="number", class_="classic_input", placeholder=code.mult) }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.effective.label(class_="text_20px") }}</td>
+                    <td class="t_center">{{ form.effective(class_="vab_checkbox", checked=(True if code.effective == 1 else False)) }}</td>
+                </tr>
+            </table>
+            <div class="center_button ">
+                <td class=" t-center">{{ form.submit_modify_code(class_="vab_button") }}</td>
+                <td class=" t-center">{{ form.submit_delete_code(class_="vab_button danger_button") }}</td>
+            </div>
+        </form>
+    </div>
+{% endblock %}

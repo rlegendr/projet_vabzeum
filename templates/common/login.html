@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block left_sidebar %}
+    <div class="left_sidebar"></div>
+{% endblock %}
+{% block right_sidebar %}
+    <div class="right_sidebar"></div>
+{% endblock %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1>{% block title %} Connexion {% endblock %}</h1>
+    </div>
+    <div class="login_div vab_box_shadow  justify-content-center align-items-center">
+        <form name="login_form" aria-disabled="true"
+              action=""
+              method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <img class="login_img" src="/static/src/blason.png">
+            <div class="flashes">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category != "global_message" %}
+                                <div class="flash_msg {{ category }}">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="t_center">
+                <div>
+                    {{ form.username.label(class_="text_18px") }}<br>
+                    {{ form.username(class_="classic_input") }}
+                </div>
+                <div>
+                    {{ form.password.label(class_="text_18px") }}<br>
+                    {{ form.password(class_="classic_input") }}
+                </div>
+                <div class="center_button">
+                    {{ form.submit(class_="vab_button") }}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

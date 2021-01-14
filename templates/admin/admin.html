@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="" style="color: #294B4C">
+            {% block title %} Administration {% endblock %}
+        </h1>
+    </div>
+    <div style="margin: 20px" class="text_20px t-center">Gestion de la base de données:</div>
+    <div class="vab_box_shadow menu">
+        <a class="vab_button" href="{{ url_for('members_list') }}">
+            <span>Gérer les membres</span>
+        </a>
+        <a class="vab_button" href="{{ url_for('matchs_list') }}">
+            <span>Gérer les matchs</span>
+        </a>
+        <a class="vab_button" href="{{ url_for('codes_list') }}">
+            <span>Gérer les codes</span>
+        </a>
+        <a class="vab_button" href="{{ url_for('manage_scale') }}">
+            <span>Barême vabzeum</span>
+        </a>
+    </div>
+    <div style="margin: 20px" class="text_20px t-center">Génération de fichiers:</div>
+    <div class="vab_box_shadow menu">
+        <a class="vab_button" href="{{ url_for('generate_score') }}">
+            <span>Générer les scores</span>
+        </a>
+    </div>
+    <div style="margin: 20px" class="text_20px t-center">Etat du bot:</div>
+    <div class="vab_box_shadow" style="padding: 10px">
+        <div class="flashes">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == "message_bot" %}
+                            <div class="flash_msg {{ category }}">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% if bot_status %}
+            <p class="t_center">Le bot est allumé</p>
+        {% else %}
+            <p class="t_center">Le bot est éteint</p>
+        {% endif %}
+        <div class="d_flex" style="justify-content: center">
+            <a class="vab_button" href="{{ url_for('start_bot') }}">
+                <span>Démarrer le bot</span>
+            </a>
+            <a class="vab_button danger_button" href="{{ url_for('stop_bot') }}">
+                <span>Arrêter le bot</span>
+            </a>
+        </div>
+        <div style="text-align: center">
+            <a class="vab_button" href="{{ url_for('admin') }}">
+                <span>Raffraichir</span>
+            </a>
+        </div>
+        <div>Après le démarrage, attendre 5 secondes, puis cliquer sur "Raffraichir" </div>
+    </div>
+{% endblock %}

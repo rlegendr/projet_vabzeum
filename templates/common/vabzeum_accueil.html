@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('index') }}">Accueil</a> -
+            <a style="color: #294B4C" href="{{ url_for('vabzeum') }}">{% block title %}VabZeum{% endblock %}</a>
+        </h1>
+    </div>
+
+    <div class="d_flex vab_box_shadow m-auto" style="width: 60%; justify-content: space-around">
+        <div style="margin: 20px;width: 50%; border-right: #294B4C 2px solid">
+            <div class="d_flex" style="justify-content: center">
+                <a class="vab_button" href="{{ url_for('register_match') }}">
+                    <span>Enregistrer un match</span>
+                </a>
+            </div>
+            <div style="margin: 20px; margin-top: 40px">
+                <p class="text_20px">Quelques stats:</p>
+                <p class="text_18px"> - Au total il y a {{ nb_all_match }} match(s) enregistré(s)</p>
+                <p class="text_18px"> - Les admins doivent encore valider {{ nb_match_not_validated }} match(s)</p>
+                <br><br>
+            </div>
+            <div style="margin: 20px">
+                <p class="text_20px">Event en cours:</p>
+                <p class="text_18px"> - Aucun</p>
+            </div>
+        </div>
+        {% if scores %}
+            <div style="margin: 20px; width: 50%">
+                <p class="t-center">{{ nb_match }} match(s) validé(s) ce mois!</p>
+                <div class="vab_box_shadow table">
+                    <table>
+                        <tr>
+                            <td colspan="2" class=" td_title vab-blue-b-tb"><p class="text_20px">Classement
+                                temporaire</p></td>
+                        </tr>
+                        {% for elem in scores %}
+                            <tr style="width: 50px" class="
+                                        {% if elem[3]|int == 1 %}first_place{% elif elem[3]|int == 2 %}second_place{% elif elem[3]|int == 3 %}third_place{% endif %}">
+                                <td style="width: 80px" id="member_id" class="t-center vab-blue-b-tb ">
+                                    {% if elem[3]|int <= 3 %}
+                                        <img src="/static/images/ornament_{% if elem[3]|int == 1 %}gold{% elif elem[3]|int == 2 %}silver{% elif elem[3]|int == 3 %}bronze{% endif %}.png"
+                                             style="width: 50%; height: auto">
+                                    {% else %}
+                                        <p class="text_20px">{{ elem[3] }}</p>
+                                    {% endif %}
+                                </td>
+                                <td id="member_id" class="vab-blue-b-tb "><p class="text_20px">{{ elem[0] }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div style="margin: 20px; width: 50%">
+                <p class="t-center">Il n'y a aucun match de validé :(</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

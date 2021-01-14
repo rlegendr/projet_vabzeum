@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/search.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('admin') }}">Administration</a> -
+            <a style="color: #294B4C" href="{{ url_for('generate_score') }}">{% block title %}Générer les
+                scores{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="vab_box_shadow">
+        <form name="modify_user_form" aria-disabled="true"
+              action="" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="flashes">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category != "global_message" %}
+                                <div class="flash_msg {{ category }}">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <table class="">
+                <tr class="tr_space">
+                    <td style="width: 200px" class="">{{ form.start_date.label(class_="text_18px") }}</td>
+                    <td class="t_center">{{ form.start_date(type="date", class_="classic_input_large") }}</td>
+                </tr>
+                <tr class="tr_space">
+                    <td class="">{{ form.end_date.label(class_="text_18px") }}</td>
+                    <td class="t_center">{{ form.end_date(type="date", class_="classic_input_large") }}</td>
+                </tr>
+                <tr class="tr_space">
+                    <td class=" t-center td_last"
+                        colspan="2">{{ form.submit_gen_score(class_="vab_button") }}</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    {% if display %}
+        <p class="t-center">{{ nb_match }} match(s) trouvé(s)</p>
+        {% if scores %}
+            <div class="vab_box_shadow table">
+                <table>
+                    <p class="t-center">Classement</p>
+                    <tr>
+                        <td class=" td_title vab-blue-b-tb"><p class="text_20px">Pseudo</p></td>
+                        <td class=" td_title vab-blue-b-tb"><p class="text_20px">Score attaque</p></td>
+                        <td class=" td_title vab-blue-b-tb"><p class="text_20px">Score défense</p></td>
+                        <td class=" td_title vab-blue-b-tb"><p class="text_20px">Score total</p></td>
+                    </tr>
+                    {% for elem in scores %}
+                        <tr>
+                            <td id="member_id" class="vab-blue-b-tb "><p class="text_20px">{{ elem[0] }}</p>
+                            </td>
+                            <td id="member_id" class="t-center vab-blue-b-tb "><p
+                                    class="text_20px">{{ elem[1] }}</p>
+                            </td>
+                            <td id="member_id" class="t-center vab-blue-b-tb "><p
+                                    class="text_20px">{{ elem[2] }}</p>
+                            </td>
+                            <td id="member_id" class="t-center vab-blue-b-tb "><p
+                                    class="text_20px">{{ elem[1] + elem[2] }}</p></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

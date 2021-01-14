@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/search.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('admin') }}">Administration</a> -
+            <a style="color: #294B4C" href="{{ url_for('members_list') }}">{% block title %}Liste des
+                membres{% endblock %}</a>
+        </h1>
+
+        </h1>
+    </div>
+    <div class="d_flex" style="justify-content: center">
+        <input class="spaced_div search-input" id="search_nickname" type="text" name=""
+               placeholder="Surnom">
+        <a class="spaced_div disable_link vab_button" href="{{ url_for('create_member') }}">Enregistrer un
+            membre</a>
+    </div>
+    <div class="vab_box_shadow table table_alternate">
+        <table>
+            <p style="height: 5px"></p>
+            <tr id="members_list_title">
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Id</p></td>
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Surnom</p></td>
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Tag</p></td>
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Compte effectif</p></td>
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Administrateur</p></td>
+                <td class=" td_title vab-blue-b-tb"><p class="text_20px">Inscrit le</p></td>
+                <td class=" td_title vab-blue-b-tb"></td>
+            </tr>
+            {% for member in members %}
+                <tr id="member_list_tr_{{ member.id }}">
+                    <td id="member_id" class="vab-blue-b-tb "><p class="text_18px">{{ member.id }}</p></td>
+                    <td id="member_nickname" class="vab-blue-b-tb "
+                        style="text-align: left"><p class="text_18px">{{ member.nickname }}</p></td>
+                    <td id="member_tag" class="vab-blue-b-tb "><p class="text_18px">{{ member.tag }}</p></td>
+                    <td id="member_effective" class="vab-blue-b-tb  t-center"><p
+                            class="text_18px">
+                        <i class="icon {% if member.effective == 1 %}green{% else %}red{% endif %} material-icons">
+                            {% if member.effective == 1 %}done{% else %}close{% endif %}</i>
+                    </p>
+                    </td>
+                    <td id="member_admin" class="vab-blue-b-tb  t-center">
+                        <i class="icon {% if member.admin == 1 %}green{% else %}red{% endif %} material-icons">
+                            {% if member.admin == 1 %}star{% else %}close{% endif %}</i></td>
+                    <td id="member_nickname" class="vab-blue-b-tb "
+                        style="text-align: left"><p class="text_18px">{{ member.created }}</p></td>
+                    <td class="text_18px vab-blue-b-tb  t-center"><a
+                            href="{{ url_for('modify_member', id=member.id) }}"
+                            style="color: #294B4C">
+                        <i class="material-icons">
+                            create
+                        </i>
+                    </a></td>
+                    {#        {{ url_for('/admin/members_list/' + member.id|string)}}#}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

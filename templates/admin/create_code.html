@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('codes_list') }}">Liste des codes</a> -
+            <a style="color: #294B4C" href="{{ url_for('create_code') }}">{% block title %}Créer un
+                code{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="modify_code_div">
+        <form style="width: 400px; margin: auto" class="vab_box_shadow" name="modify_user_form" aria-disabled="true"
+              action="" method="post" enctype="multipart/form-data">
+            <div class="flashes">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category != "global_message" %}
+                                <div class="flash_msg {{ category }}">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {{ form.hidden_tag() }}
+            <table class="m-auto">
+                <tr>
+                    <td class="">{{ form.name.label(class_="text_20px") }}</td>
+                    <td class="t-center ">{{ form.name(class_="classic_input") }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.mult.label(class_="text_20px") }}</td>
+                    <td class="t-center ">{{ form.mult(class_="classic_input", type="number") }}</td>
+                </tr>
+                <tr>
+                    <td class="">{{ form.effective.label(class_="text_20px") }}</td>
+                    <td class="t-center ">{{ form.effective }}</td>
+                </tr>
+            </table>
+            <div class="center_button ">
+                <td class=" t-center">{{ form.submit_create_code(class_="vab_button") }}</td>
+            </div>
+        </form>
+    </div>
+{% endblock %}

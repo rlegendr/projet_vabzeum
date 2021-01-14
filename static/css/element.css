@@ -1,0 +1,70 @@
+html, body {
+    height: 100%;
+	margin: 0; padding: 0;
+}
+
+
+body {
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-image: linear-gradient(to right, #C6B299, #917D6B);
+    font-family: Verdana;
+    display : table;
+}
+
+h1 {
+    font-size: 25px;
+    color: #294B4C;
+    /*text-align: center;*/
+    padding: 10px;
+    /*margin-bottom: 20px;*/
+    /*padding-bottom: 10%;*/
+}
+
+h1 a {
+    font-size: 25px;
+    color: #294B4C;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+option {
+    margin-right: 100px;
+}
+
+input {
+    font-size: 18px;
+}
+
+fieldset {
+    border: none;
+}
+
+form {
+    padding: 5px 15px 5px 15px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+label {
+    line-height: 2;
+}
+
+li {
+    list-style-type: none;
+}
+
+.background_image {
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    height: auto;
+    /*margin: auto;*/
+    /*height: auto;*/
+}

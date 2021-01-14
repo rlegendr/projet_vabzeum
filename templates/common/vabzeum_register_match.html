@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/manage_match.js" type="text/javascript"></script>
+    <script>$(document).ready(init_register_match());</script>
+{% endblock %}
+
+{% block left_sidebar %}
+    <div class="left_sidebar"></div>
+{% endblock %}
+{% block right_sidebar %}
+    <div class="right_sidebar"></div>
+{% endblock %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('vabzeum') }}">VabZeum</a> /
+            <a style="color: #294B4C" href="{{ url_for('register_match') }}">{% block title %}Enregistrer un
+                match{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="vab_box_shadow">
+        <div class="flashes">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category != "global_message" %}
+                            <div class="flash_msg {{ category }}">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form name="register_form" aria-disabled="true" action="" method="post"
+              enctype="multipart/form-data">
+            <fieldset id="fieldset_register">
+                {{ form.hidden_tag() }}
+                <div class="">
+                    <table>
+                        <tr>
+                            <td>{{ form.atk_def.label(class_=" text_15px") }}</td>
+                            <td class="p-l-10">{{ form.atk_def(class_="select") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <table>
+                        <tr class="">
+                            <td>{{ form.nb_ally.label(class_="text_15px") }}</td>
+                            <td class="p-l-10">{{ form.nb_ally(class_="select", onchange="nb_ally_ops(this.value)") }}</td>
+                            <td class="p-l-10">{{ form.nb_vab.label(class_="text_15px") }}</td>
+                            <td class="p-l-10">{{ form.nb_vab(class_="select", onchange="nb_vab_ops(this.value)") }}</td>
+                            <td class="p-l-10">{{ form.nb_ennemy.label(class_="text_15px") }}</td>
+                            <td class="p-l-10">{{ form.nb_ennemy(class_="select") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <table>
+                        <tr>
+                            <td>{{ form.entity.label(class_="text_15px") }}</td>
+                            <td class="p-l-10">{{ form.entity(class_="select") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <table>
+                        <tr><label class="text_15px">Alliers:</label></tr>
+                        <tr>
+                            <td class="p-l-10">{{ form.ally_1(class_="select", onchange="change_player_list(this.value, 1)") }}</td>
+                            <td class="p-l-10">{{ form.ally_2(class_="select", onchange="change_player_list(this.value, 2)") }}</td>
+                            <td class="p-l-10">{{ form.ally_3(class_="select", onchange="change_player_list(this.value, 3)") }}</td>
+                            <td class="p-l-10">{{ form.ally_4(class_="select", onchange="change_player_list(this.value, 4)") }}</td>
+                            <td class="p-l-10">{{ form.ally_5(class_="select", onchange="change_player_list(this.value, 5)") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <table>
+                        <tr>
+                            <td>{{ form.bonus_mult.label(class_="text_15px") }}</td>
+                            <td class="p-l-10">{{ form.bonus_mult(class_="select") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <table>
+                        <tr>
+                            <td>{{ form.screen.label(class_="text_15px", style="display : none;") }}</td>
+                            <td class="">{{ form.screen(class_="vab_button register_match_screen_input") }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="margin-top: 15px;">
+                    <table>
+                        <tr>{{ form.commentary.label(class_="text_15px") }}</tr>
+                        <tr class="">
+                            <td>{{ form.commentary(placeholder="facultatif", class_="ml_10px commentary") }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+            <div class="center_button ">
+                <button class="vab_button neutral_button" id="confirm_match" name="confirm_match"
+                        onclick="button_confirm()"
+                        type="button">Soumettre
+                </button>
+                <button class="vab_button neutral_button" id="modify_match" name="modify_match"
+                        onclick="button_modify()"
+                        type="button">Modifier
+                </button>
+                {{ form.validate_button(style="margin-top: 5px", class_="vab_button", onclick="button_validate()") }}
+            </div>
+        </form>
+    </div>
+    <p class="text_15px">Erreur: {{ form.errors }}</p>
+{% endblock %}

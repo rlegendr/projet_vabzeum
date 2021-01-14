@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/manage_member.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class=" justify-content-start align-items-start">
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('members_list') }}">Liste des membres</a> -
+            <a style="color: #294B4C" href="{{ url_for('modify_member', id=member.id) }}">{% block title %}Profil de
+                {{ member.nickname }}{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="vab_box_shadow">
+        <form class="pt_15" name="modify_user_form" aria-disabled="true"
+              action="" method="post" enctype="multipart/form-data">
+            <div class="flashes">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            {% if category != "global_message" %}
+                                <div class="flash_msg {{ category }}">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {{ form.hidden_tag() }}
+            <table class="">
+                <tr>
+                    <td class="pb_15">{{ form.username.label(class_="text_18px") }}</td>
+                    <td class="t-center pb_15">{{ form.username(class_="classic_input", placeholder=member.nickname) }}</td>
+                </tr>
+                <tr>
+                    <td class="pb_15">{{ form.password.label(class_="text_18px") }}</td>
+                    <td class="t-center pb_15">{{ form.password(class_="classic_input") }}</td>
+                </tr>
+                <tr>
+                    <td class="pb_15">{{ form.tag.label(class_="text_18px") }}</td>
+                    <td class="t-center pb_15">{{ form.tag(class_="classic_input", placeholder=member.tag) }}</td>
+                </tr>
+                <tr>
+                    <td class="pb_15">{{ form.effective.label(class_="text_18px") }}</td>
+                    <td class="t-center pb_15">{{ form.effective(class_="vab_checkbox", checked=(True if member.effective == 1 else False)) }}</td>
+                </tr>
+                <tr>
+                    <td class="pb_15">{{ form.admin.label(class_="text_18px") }}</td>
+                    <td class="t-center pb_15">{{ form.admin(class_="vab_checkbox", checked=(True if member.admin == 1 else False)) }}</td>
+                </tr>
+            </table>
+            <div class="d_flex" style="justify-content: center">
+                <div class="t-center">{{ form.submit_modify_user(class_="vab_button") }}</div>
+                <div class="ml_10px t-center">
+                    <input class="vab_button danger_button" id="js_delete_member"
+                           name="js_delete_member"
+                           onclick="delete_member()"
+                           type="button" value="Supprimer">
+                </div>
+            </div>
+            <div>
+                <div style="width: 100%"><p class="text_15px t-center" id="alert_delete_msg" style="display: none">
+                    La suppression est définitive, t'es
+                    sûr? </p><br>
+                </div>
+                <div class="d_flex" style="justify-content: center">
+                    <div><a style="display: none" class="disable_link vab_button danger_button"
+                            id="submit_delete_member"
+                            name="js_delete_member" href="{{ url_for('delete_member', id=member.id) }}"
+                            type="button">Oui</a>
+                    </div>
+                    <div><input style="display: none" class="ml_10px vab_button" id="js_cancel_delete_member"
+                                name="js_delete_member" onclick="cancel_delete_member()"
+                                type="button" value="Non">
+                    </div>
+                </div>
+        </form>
+    </div>
+{% endblock %}

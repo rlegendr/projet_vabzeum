@@ -1,0 +1,530 @@
+
+:root {
+    --select-border: #777;
+    --select-focus: blue;
+    --select-arrow: var(--select-border);
+}
+
+.main_div {
+    width: 100%;
+    height: fit-content;
+}
+
+/*:layout.html:*/
+
+
+/*:Common:*/
+
+.tr_space {
+    border-bottom: 15px;
+}
+
+.classic_input {
+    text-align: center;
+    width: 75%;
+    margin: auto;
+    border-radius: 3px;
+    border: none;
+    line-height: 1;
+    font-size: 18px;
+    padding: 7px 0px;
+}
+
+.classic_input_large {
+    margin: auto;
+    margin-left: 5px;
+    text-align: center;
+    width: 200px;
+    border-radius: 3px;
+    border: none;
+    line-height: 1;
+    font-size: 18px;
+    padding: 7px 0px;
+}
+
+.admin_input {
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    border-radius: 3px;
+    border: none;
+    line-height: 1;
+    font-size: 18px;
+    padding: 7px 0px;
+    /*margin-bottom: 15px;*/
+}
+
+.a_no_link_white_vab:hover {
+    text-decoration: none;
+    color: #C6B299;
+}
+
+/*:Messages flash:*/
+
+.flashes {
+    margin: auto;
+
+}
+
+.flash_msg {
+    text-align: center;
+    margin: 20px;
+    font-size: 15px;
+    /*font-weight: bold;*/
+    list-style-type: none;
+    border-radius: 4px;
+    line-height: 2;
+}
+
+.message {
+    color: #444444;
+    background-color: rgb(166, 208, 157);
+
+}
+
+.message_error {
+    color: #FFFFFF;
+    /*color: ;*/
+    /*background-color: #E57373;*/
+    background-color: #FF3636;
+}
+
+.message_global {
+    color: #444444;
+}
+
+.message_bot {
+    background-color: #ffb14d;
+    color: #444444;
+}
+
+/*::*/
+
+.bg_gradiant_blue_vab {
+    background-image: linear-gradient(to bottom, #3D6768, #294B4C);
+}
+
+/*:Select:*/
+
+/* class applies to select element itself, not a wrapper element */
+.select {
+    display: block;
+    font-size: 15px;
+    /*font-family: sans-serif;*/
+    font-weight: 700;
+    color: #444;
+    line-height: 1;
+    padding: .6em 1.4em .5em .8em;
+    width: 100%;
+    max-width: 100%; /* useful when width is set to anything other than 100% */
+    box-sizing: border-box;
+    margin: 0;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    border: 2px solid #aaaaaa;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+    border-radius: .5em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('/static/src/drop_down_arrow.png'),
+    linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+    background-repeat: no-repeat, repeat;
+    /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+    background-position: right .3em top 50%, 0 0;
+    /* icon size, then gradient */
+    background-size: .65em auto, 100%;
+}
+
+/* Hover style */
+.select:hover {
+    border: 2px solid #888888;
+}
+
+/* Focus style */
+.select:focus {
+    border-color: #294B4C;
+
+    color: #222;
+    outline: none;
+}
+
+/* Set options to normal weight */
+.select option {
+    font-weight: normal;
+    border-radius: 5px;
+    color: #294B4C;
+    background-color: #cccccc;
+    font-weight: bold;
+}
+
+/*::*/
+
+.pb_15 {
+    padding-bottom: 15px;
+}
+
+.pt_15 {
+    padding-top: 15px;
+}
+
+.p_10 {
+    padding: 10px;
+}
+
+.p_15 {
+    padding: 15px;
+}
+
+.p_20 {
+    padding: 20px;
+}
+
+.p-l-10 {
+    padding-left: 10px;
+}
+
+p-l-20 {
+    padding-left: 20px;
+}
+
+.td_last {
+    border-bottom: none;
+}
+
+.t-center {
+    text-align: center;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.mb_10px {
+    margin-bottom: 10px;
+}
+
+.ml_10px {
+    margin-left: 10px;
+}
+
+.disable_link:hover {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.bg-blue-vab {
+    background-color: #294B4C;
+}
+
+.bg-white-vab {
+    background-color: #C6B299;
+}
+
+.col-blue-vab {
+    color: #294B4C;
+}
+
+.col-white-vab {
+    color: #C6B299;
+}
+
+.bt-none {
+    border-top: none;
+}
+
+.bb-none {
+    border-bottom: none;
+}
+
+.d_flex {
+    display: flex;
+}
+
+.vab-blue-b-tb {
+    border-top: #294B4C solid;
+}
+
+.t_center {
+    text-align: center;
+}
+
+.td_title {
+    border-top: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/*:Button:*/
+
+.right_button {
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 10px
+}
+
+.center_button {
+    text-align: center;
+    margin: 10px;
+}
+
+.vab_button {
+    width: 130px;
+    color: #C6B299;
+    background-color: #294B4C;
+    border: 2px #000000 solid;
+    padding: 8px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 4px;
+    /*margin-top: 10px;*/
+    /*border-color: #cccccc;*/
+}
+
+.vab_button:hover {
+    background-color: #1a3435;
+}
+
+.vab_button:disabled {
+    /*color: #444444;*/
+    opacity: 50%;
+    background-color: #444444; /* Grey */
+    /*border: none;*/
+    /*color: black;*/
+    /*padding: 8px 16px;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+    /*display: inline-block;*/
+    /*font-size: 16px;*/
+    /*border-radius: 5px;*/
+}
+
+.spaced_div {
+    margin: 10px;
+}
+
+.search_button {
+    color: #cccccc;
+    background-color: #a9a9a9;
+}
+
+.neutral_button {
+    color: #222222;
+    background-color: #a9a9a9;
+    border: #2f3640 1px solid;
+}
+
+.neutral_button:hover {
+    background-color: #888888!important;
+}
+
+.danger_button {
+    color: aliceblue;
+    background-color: #bf2d2f;
+}
+
+.danger_button:hover {
+    background-color: #862224;
+}
+
+/*::*/
+
+
+.vab_box_shadow {
+    box-sizing: border-box;
+    background-color: #cccccc;
+    border-radius: 5px;
+    box-shadow: 4px 4px 16px #294B4C;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}
+
+.table {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+
+    /*font-family: Impact;*/
+    /*font-weight: lighter;*/
+}
+
+.table_alternate tr:nth-child(odd) {
+    background-color: #dddddd;
+    border-radius: 5px;
+}
+
+.table_alternate tr:nth-child(even) {
+    border-radius: 5px;
+    background-color: #eeeeee;
+}
+
+.table tr td {
+    padding: 10px 20px 10px 20px;
+}
+
+
+/*!*:login.html:*!*/
+
+.login_img {
+    display: flex;
+    margin: auto;
+    width: 10em;
+    height: auto;
+    padding: 10px;
+}
+
+/*::*/
+
+.text_20px {
+    font-size: 20px;
+    margin: 0;
+!important;
+
+}
+
+.text_18px {
+    font-size: 18px;
+    margin: 0;
+}
+
+.text_15px {
+    font-size: 15px;
+    margin: 0;
+}
+
+/*:classement:*/
+
+.first_place {
+    background-image: linear-gradient(to right, #B98F0C, #FFCA0C);
+}
+
+.second_place {
+    background-image: linear-gradient(to right, #8B8B8B, #cccccc);
+
+}
+
+.third_place {
+    background-image: linear-gradient(to right, #815E48, #ad7d67);
+}
+
+/*::*/
+
+/*:vabzeum_register_match.html:*/
+
+.register_match_screen_input {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    color: #C6B299;
+    background-color: #294B4C;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.vab_checkbox {
+    background-color: #294B4C;
+    -webkit-appearance: none;
+    /*background-color: #fafafa;*/
+    border: 2px solid #000000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 6px;
+    display: inline-block;
+    position: relative;
+    margin-top: 5px;
+}
+
+.vab_checkbox:hover {
+    background-color: #1a3435;
+}
+
+.vab_checkbox:checked:after {
+    transition: 0.9s;
+    content: '\2714';
+    font-size: 21px;
+    position: absolute;
+    top: 0px;
+    left: 6px;
+    color: #C6B299;
+    /*font-weight: bold;*/
+}
+
+.vab_checkbox:disabled {
+    background-color: rgba(41,75,76,0.58);
+}
+
+
+/*::*/
+
+/*:modify_member.html:*/
+
+
+/*..*/
+
+/*:modify_match.html:*/
+
+
+/*..*/
+
+/*:matchs_list.html:*/
+
+
+/*::*/
+
+/*:admin:*/
+
+.menu {
+    padding: 25px;
+    display: flex;
+    width: 600px;
+    justify-content: space-around;
+    /*justify-items: center;*/
+    /*align-items: center;*/
+}
+
+/*::*/
+
+.guild_screen {
+    position: absolute;
+    width: 65%;
+    margin: auto;
+    top: 11%;
+    left: 15%;
+    height: auto;
+}
+
+.red {
+    color: #ad1100;
+}
+
+.green {
+    color: #41ad19;
+}
+
+.icon {
+    font-weight: bolder !important;
+    font-size: 30px !important;
+}
+
+.commentary {
+    margin-top: 5px;
+    width: 350px;
+    max-width: 350px;
+    height: 35px;
+    font-size: 12px;
+    border: none;
+    border-radius: 3px;
+}

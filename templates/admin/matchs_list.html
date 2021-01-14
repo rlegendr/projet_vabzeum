@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% block additionnal_end_script %}
+    <script src="/static/js/search.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="p-3" style="color: #294B4C">
+            <a style="color: #294B4C" href="{{ url_for('admin') }}">Administration</a> -
+            <a style="color: #294B4C" href="{{ url_for('matchs_list') }}">{% block title %}Liste des
+                matchs{% endblock %}</a>
+        </h1>
+    </div>
+    <div class="d_flex" style="justify-content: center">
+        <form class="search-box" method="get">
+            <input name="search_id_match" class="search_input_with_button" id="search_id_match" type="text"
+                   placeholder="N°match">
+            <button id="button_search_id_match" class="search-button" href="#"
+                    onclick="{{ url_for('matchs_list') }}"
+                    disabled>
+                <i class="material-icons">search</i>
+            </button>
+        </form>
+    </div>
+    <div class="vab_box_shadow table table_alternate">
+        <table>
+            <p style="height: 5px"></p>
+            <tr id="members_list_title">
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">N°match</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Responsable</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Alliers</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Nb_Alliers</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Ennemis</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Diff</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Atk_def</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Entité</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Bonus</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Score</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Date</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Check_bot</p></td>
+                <td class="vab-blue-b-tb td_title"><p class="text_15px">Validé</p></td>
+                <td class="vab-blue-b-tb td_title"></td>
+            </tr>
+            {% for match in matchs %}
+                <tr id="match_list_tr_{{ match.id }}">
+                    <td id="match_nb" class="vab-blue-b-tb t-center"><p class="text_15px">{{ match.id }}</p></td>
+                    <td id="match_nb" class="vab-blue-b-tb t-center"><p class="text_15px">{{ match.used_nickname }}</p>
+                    </td>
+                    <td id="match_allies" class="vab-blue-b-tb" style="text-align: left">
+                        {% set i = 0 %}
+                        {% for i in range(5) %}
+                            {% if match.get_ally(i) != "None" %}
+                                <p class="text_15px">{{ match.get_ally(i) }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td id="match_nb_ennemy" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.nb_ally }}</p></td>
+                    <td id="match_nb_ally" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.nb_ennemy }}</p></td>
+                    <td id="match_diff" class="vab-blue-b-tb t-center"><p class="text_15px">{{ match.diff }}</p>
+                    </td>
+                    <td id="match_side" class="vab-blue-b-tb t-center"><p class="text_15px">{{ match.side }}</p>
+                    </td>
+                    <td id="match_entity" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.entity }}</p></td>
+                    <td id="match_bonus" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.bonus_mult_name }}
+                        (x{{ match.bonus_mult }})</p>
+                    </td>
+                    <td id="match_score" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.score }}</p>
+                    </td>
+                    <td id="match_score" class="vab-blue-b-tb t-center"><p
+                            class="text_15px">{{ match.created }}</p>
+                    </td>
+                    <td id="match_bot_checker" class="vab-blue-b-tb t-center">
+                        <i class="icon {% if match.bot_checker == 1 %}green{% else %}red{% endif %} material-icons">
+                            {% if match.bot_checker == 1 %}done{% else %}close{% endif %}</i></td>
+                    <td id="match_admin_validator" class="vab-blue-b-tb t-center">
+                        <i class="icon {% if match.admin_validator == 1 %}green{% else %}red{% endif %} material-icons">
+                            {% if match.admin_validator == 1 %}done{% else %}close{% endif %}</i></td>
+
+                    <td class="vab-blue-b-tb"><a href="{{ url_for('modify_match', id=match.id) }}"
+                                                 style="color: #294B4C"><i class="material-icons">create</i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            {#                <p style="height: 5px"></p>#}
+        </table>
+    </div>
+{% endblock %}
