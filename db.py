@@ -1,4 +1,4 @@
-from minitwit import dba
+from app import dba
 from flask_login import UserMixin
 
 

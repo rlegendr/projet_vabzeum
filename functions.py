@@ -9,7 +9,7 @@ from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 from os import getcwd
 from datetime import datetime
-from minitwit import Mypath
+from app import Mypath
 
 
 def logs(message):
